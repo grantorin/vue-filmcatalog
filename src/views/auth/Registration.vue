@@ -15,16 +15,6 @@
 
         .row
           .input-field.col.s6
-            i.prefix.material-icons account_box
-            input#first_name.validate(type="text" v-model="firstname" required)
-            label(for="first_name" data-error="First Name is required") First Name
-          .input-field.col.s6
-            i.prefix.material-icons assignment_ind
-            input#last_name.validate(type="text" v-model="lastname" required)
-            label(for="last_name" data-error="Last Name is required") Last Name
-
-        .row
-          .input-field.col.s6
             i.prefix.material-icons fingerprint
             input#password.validate(type="password" v-model="pass" required)
             label(for="password") Password
@@ -47,8 +37,6 @@ export default {
     return {
       login: '',
       email: '',
-      firstname: '',
-      lastname: '',
       pass: '',
       passc: ''
     }
@@ -89,7 +77,18 @@ export default {
         } else {
           this.$refs.passc.classList.remove('invalid');
         }
-        console.log(this.$data);
+
+        this.$store.dispatch('registerUser', {
+          email: this.email,
+          password: this.pass
+        })
+        .then( () => {
+          this.$router.push('/')
+        })
+        .catch(err => {
+          // eslint-disable-next-line no-undef
+          Materialize.toast(err.message, 6000)
+        })
       }
     }
   }
