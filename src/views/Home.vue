@@ -9,7 +9,7 @@
             span.card-title {{film.title}}
             p {{film.description | filterDescription}}
           .card-action
-            a(:href="`/post/${film.id}`") more
+            router-link(:to="`/post/${film.id}`") more
             span.new.badge.blue(data-badge-caption="") {{film.type}}
 </template>
 

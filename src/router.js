@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import Registration from '@/views/auth/Registration'
 import Authorization from '@/views/auth/Authorization'
 import NewFilm from '@/views/NewFilm'
+import Film from '@/views/Film'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       path: '/new',
       name: 'newfilm',
       component: NewFilm
+    },
+    {
+      path: '/post/:id',
+      name: 'film',
+      component: Film
     }
   ]
 })
