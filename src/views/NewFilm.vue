@@ -4,7 +4,7 @@
 
       h5 New Film
 
-      form.col.s12(@submit.prevent="onSubmit")
+      form.col.s12(@submit.prevent="addFilm")
         .row
           .col.s12.m4.l3
             .poster-box
@@ -70,6 +70,16 @@ export default {
     removePoster: function (e) {
       this.posterSrc = '';
       this.posterName = '';
+    },
+
+    addFilm() {
+      const newFilm = {
+        title: this.name,
+        description: this.description,
+        poster: this.posterSrc,
+        type: this.type
+      }
+      this.$store.dispatch('createdFilm', newFilm)
     }
   }
 }
