@@ -85,10 +85,17 @@ export default { // films.js
     ]
   },
   mutations: {
-
+    createdFilm (state, payload) {
+      state.films.push(payload)
+    }
   },
   actions: {
-
+    createdFilm ({commit}, payload) {
+      payload.id = parseInt(Math.random() * 1000)
+      payload.completed = false
+      payload.editing = false
+      commit('createdFilm', payload)
+    }
   },
 
   getters: {
