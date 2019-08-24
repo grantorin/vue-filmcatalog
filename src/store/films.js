@@ -94,6 +94,11 @@ export default { // films.js
   getters: {
     films (state) {
       return state.films
+    },
+    film (state) {
+      return filmId => {
+        return state.films.find(film => film.id == filmId)
+      }
     }
   }
 }
