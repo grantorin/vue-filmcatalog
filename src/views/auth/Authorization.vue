@@ -52,6 +52,12 @@ export default {
         })
       }
     }
+  },
+
+  created() {
+    if (this.$route.query['authError']) {
+      Materialize.toast('Please log in to access this page', 6000)
+    }
   }
 }
 </script>

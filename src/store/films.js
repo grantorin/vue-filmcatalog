@@ -90,7 +90,7 @@ export default { // films.js
     }
   },
   actions: {
-    createdFilm ({commit}, payload) {
+    createdFilm ({ commit }, payload) {
       payload.id = parseInt(Math.random() * 1000)
       payload.completed = false
       payload.editing = false
