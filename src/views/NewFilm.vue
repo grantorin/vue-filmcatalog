@@ -22,7 +22,16 @@
               .input-field.col.s12
                 textarea#textarea1.materialize-textarea(v-model="description")
                 label(for="textarea1") Description
-              .file-field.input-field.col.s12
+              .switch.col.s12
+                label
+                  | URL
+                  input(type="checkbox" v-model="typeSrc")
+                  span.lever
+                  | Local file
+              .input-field.col.s12(v-if="!typeSrc")
+                input#url.materialize-textarea(type="url" v-model="posterSrc")
+                label(for="url") Url
+              .file-field.input-field.col.s12(v-if="typeSrc")
                 .btn
                   span Poster
                   input(type="file" @change="onFileChange")
@@ -45,6 +54,7 @@ export default {
       posterName: '',
       posterSrc: '',
       type: '',
+      typeSrc: false
     }
   },
 
@@ -76,7 +86,7 @@ export default {
       const newFilm = {
         title: this.name,
         description: this.description,
-        poster: this.posterName,
+        poster: this.posterName || this.posterSrc,
         type: this.type
       }
       this.$store.dispatch('createdFilm', newFilm)

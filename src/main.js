@@ -27,6 +27,8 @@ new Vue({
         this.$store.dispatch('autoLoginUser', user)
       }
     })
+
+    this.$store.dispatch('fetchFilms')
   },
   render: h => h(App)
 }).$mount('#app')

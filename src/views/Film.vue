@@ -20,9 +20,6 @@ export default {
     film() {
       return this.$store.getters.film(this.id)
     }
-  },
-  mounted() {
-    console.log(this.$store.getters.film(this.id));
   }
 }
 </script>
