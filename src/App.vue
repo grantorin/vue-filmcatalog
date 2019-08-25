@@ -10,14 +10,20 @@
             i.material-icons menu
 
           ul.nav-list.right.hide-on-med-and-down
-            li.nav-list__item(v-for="link in linkMenu" :key="link.title")
-              router-link.nav-list__link(:to="`${link.url}`")
+            router-link.nav-list__item(v-for="link in linkMenu" :key="link.title" :to="`${link.url}`" tag="li" exact active-class="active")
+              a.nav-list__link
                 i.material-icons {{ link.icon }}
                 | {{ link.title }}
+            li.nav-list__item(v-if="isUserLoggedIn")
+              a.nav-list__link(@click="logoutUser")
+                i.material-icons exit_to_app
+                | Logout
 
       ul#mobile-menu.side-nav
-        li(v-for="link in linkMenu" :key="link.title")
-          router-link.nav-list__link(:to="`${link.url}`") {{ link.title }}
+        router-link.nav-list__item(v-for="link in linkMenu" :key="link.title" :to="`${link.url}`" tag="li" exact active-class="active")
+          a.nav-list__link {{ link.title }}
+        li.nav-list__item(v-if="isUserLoggedIn")
+          a.nav-list__link(@click="logoutUser") Logout
 
     router-view
 </template>
@@ -25,15 +31,33 @@
 <script>
 import { setTimeout } from 'timers';
 export default {
-  data() {
-    return {
-      linkMenu: [
-        {title: 'Home', url: '/', icon: 'account_balance'},
-        {title: 'About', url: '/about', icon: 'art_track'},
-        {title: 'New Film', url: '/new', icon: 'add_box'},
-        {title: 'Registration', url: '/reg', icon: 'assignment_ind'},
-        {title: 'Authorization', url: '/auth', icon: 'account_circle'}
+  computed: {
+    isUserLoggedIn() {
+      return this.$store.getters.isUserLoggedIn
+    },
+    linkMenu() {
+      if(this.isUserLoggedIn) {
+        return [
+            {title: 'Home', url: '/', icon: 'account_balance'},
+            {title: 'About', url: 'about', icon: 'art_track'},
+            {title: 'New Film', url: 'new', icon: 'add_box'}
+        ]
+      }
+      return [
+          {title: 'Home', url: '/', icon: 'account_balance'},
+          {title: 'About', url: 'about', icon: 'art_track'},
+          {title: 'Registration', url: 'reg', icon: 'assignment_ind'},
+          {title: 'Authorization', url: 'auth', icon: 'account_circle'},
       ]
+    }
+  },
+
+  methods: {
+    logoutUser() {
+      this.$store.dispatch('logoutUser')
+      if(this.$router.currentRoute.name !== 'home') {
+        this.$router.push('/')
+      }
     }
   },
 
@@ -56,9 +80,6 @@ a
 .row
   display: flex
   flex-wrap: wrap
-
-.card
-  // height: 100%
 
 .header
   margin-bottom: 30px

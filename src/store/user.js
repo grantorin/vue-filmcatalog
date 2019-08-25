@@ -27,12 +27,22 @@ export default {
       } catch (error) {
         throw error
       }
+    },
+    autoLoginUser ({ commit }, payload) {
+      commit('setUser', payload.uid)
+    },
+    logoutUser ({ commit }) {
+      fb.auth().signOut()
+      commit('setUser', null)
     }
   },
 
   getters: {
     user (state) {
       return state.user
+    },
+    isUserLoggedIn (state) {
+      return !!state.user
     }
   }
 }
