@@ -26,7 +26,7 @@
         button.btn.waves-effect.waves-light.red(type="reset" name="reset" @click="onReset")
           | Reset
           i.material-icons.right clear
-        button.right.btn.waves-effect.waves-light.waves-effect(type="submit" name="send")
+        button.right.btn.waves-effect.waves-light.waves-effect(type="submit")
           | Submit
           i.material-icons.right send
 </template>
