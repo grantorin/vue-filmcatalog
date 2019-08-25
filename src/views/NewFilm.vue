@@ -76,10 +76,16 @@ export default {
       const newFilm = {
         title: this.name,
         description: this.description,
-        poster: this.posterSrc,
+        poster: this.posterName,
         type: this.type
       }
       this.$store.dispatch('createdFilm', newFilm)
+        .then(() => {
+          Materialize.toast('success', 3000)
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
   }
 }
