@@ -19,6 +19,14 @@ export default {
       } catch (error) {
         throw error
       }
+    },
+    async loginUser ({ commit }, { email, password }) {
+      try {
+        const resp = await fb.auth().signInWithEmailAndPassword(email, password)
+        commit('setUser', resp.user.uid)
+      } catch (error) {
+        throw error
+      }
     }
   },
 
