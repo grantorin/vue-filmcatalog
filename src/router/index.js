@@ -29,8 +29,7 @@ export default new Router({
     {
       path: '/reg',
       name: 'registration',
-      component: Registration,
-      beforeEnter: AuthProtect
+      component: Registration
     },
     {
       path: '/auth',

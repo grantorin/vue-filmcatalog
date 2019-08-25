@@ -80,6 +80,15 @@ a
 .row
   display: flex
   flex-wrap: wrap
+  &>.col
+    margin-left: auto
+    margin-right: auto
+    &>.card
+      height: calc(100% - 1rem)
+      display: flex
+      flex-direction: column
+      .card-content
+        flex-grow: 1
 
 .header
   margin-bottom: 30px

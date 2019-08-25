@@ -1,6 +1,8 @@
 <template lang="pug">
   .container
-    .row
+    .progress(v-if="preload")
+      .indeterminate
+    .row(v-show="!preload")
       .col.s12.m6.xl4(v-for="film in films" :key="film.id")
         .card
           .card-image
@@ -14,9 +16,19 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 export default {
+  data() {
+    return {
+      preload: true
+    }
+  },
+
   computed: {
     films() {
+      setTimeout(() => {
+        this.preload = false
+      }, 1000)
       return this.$store.getters.films
     }
   },
