@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       login: '',
       email: '',
@@ -43,52 +43,52 @@ export default {
   },
 
   methods: {
-    validate(e) {
+    validate (e) {
 
     },
-    onReset() {
+    onReset () {
       for (const key in this.$data) {
         if (this.$data.hasOwnProperty(key)) {
-          this.$data[key] = '';
+          this.$data[key] = ''
         }
       }
     },
-    onSubmit() {
-      let formCompleted = false;
+    onSubmit () {
+      let formCompleted = false
       for (const key in this.$data) {
         if (this.$data.hasOwnProperty(key) && this.$data[key]) {
-          formCompleted = true;
-          break;
+          formCompleted = true
+          break
         }
       }
 
-      if(formCompleted) {
-        if(!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-          this.$refs.email.classList.add('invalid');
-          return;
+      if (formCompleted) {
+        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+          this.$refs.email.classList.add('invalid')
+          return
         } else {
-          this.$refs.email.classList.remove('invalid');
+          this.$refs.email.classList.remove('invalid')
         }
-        if(this.pass !== this.passc) {
-          console.log(this.$refs.passc);
-          this.$refs.passc.classList.remove('valid');
-          this.$refs.passc.classList.add('invalid');
-          return;
+        if (this.pass !== this.passc) {
+          console.log(this.$refs.passc)
+          this.$refs.passc.classList.remove('valid')
+          this.$refs.passc.classList.add('invalid')
+          return
         } else {
-          this.$refs.passc.classList.remove('invalid');
+          this.$refs.passc.classList.remove('invalid')
         }
 
         this.$store.dispatch('registerUser', {
           email: this.email,
           password: this.pass
         })
-        .then( () => {
-          this.$router.push('/')
-        })
-        .catch(err => {
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(err => {
           // eslint-disable-next-line no-undef
-          Materialize.toast(err.message, 6000)
-        })
+            Materialize.toast(err.message, 6000)
+          })
       }
     }
   }

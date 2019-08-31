@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       email: '',
       pass: ''
@@ -29,33 +29,33 @@ export default {
   },
 
   methods: {
-    onSubmit() {
-      let formCompleted = false;
+    onSubmit () {
+      let formCompleted = false
       for (const key in this.$data) {
         if (this.$data.hasOwnProperty(key) && this.$data[key]) {
-          formCompleted = true;
-          break;
+          formCompleted = true
+          break
         }
       }
-
-      if(formCompleted) {
+      if (formCompleted) {
         this.$store.dispatch('loginUser', {
           email: this.email,
           password: this.pass
         })
-        .then( () => {
-          this.$router.push('/')
-        })
-        .catch(err => {
-          // eslint-disable-next-line no-undef
-          Materialize.toast(err.message, 6000)
-        })
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(err => {
+            // eslint-disable-next-line no-undef
+            Materialize.toast(err.message, 6000)
+          })
       }
     }
   },
 
-  created() {
+  created () {
     if (this.$route.query['authError']) {
+      // eslint-disable-next-line no-undef
       Materialize.toast('Please log in to access this page', 6000)
     }
   }

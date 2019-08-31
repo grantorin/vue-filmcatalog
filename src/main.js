@@ -15,7 +15,7 @@ new Vue({
       authDomain: 'films-catalog.firebaseapp.com',
       databaseURL: 'https://films-catalog.firebaseio.com',
       projectId: 'films-catalog',
-      storageBucket: '',
+      storageBucket: 'films-catalog.appspot.com',
       messagingSenderId: '910633191616',
       appId: '1:910633191616:web:7212ae41c5beee9f'
     }

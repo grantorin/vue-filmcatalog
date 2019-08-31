@@ -34,67 +34,87 @@
               .file-field.input-field.col.s12(v-else)
                 .btn
                   span Poster
-                  input(type="file" @change="onFileChange")
+                  input(type="file" accept="image/*" @change="onFileChange")
                 .file-path-wrapper
                   input.file-path.validate(type="text" v-model="posterName")
 
         .row
           .col.s12
-            button.right.btn.waves-effect.waves-light.waves-effect(type="submit" name="send")
+            button.right.btn.waves-effect.waves-light.waves-effect(type="submit" :disabled="processUpload" name="send")
               | Add
               i.material-icons.right send
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       name: '',
       description: '',
       posterName: '',
       posterSrc: '',
       type: '',
-      typeSrc: false
+      typeSrc: false,
+      posterImg: null,
+      processUpload: false
     }
   },
 
   methods: {
-    onFileChange(e) {
-      let files = e.target.files || e.dataTransfer.files;
+    onFileChange (e) {
+      let files = e.target.files || e.dataTransfer.files
 
-      if (!files.length) return;
+      if (!files.length) return
 
-      this.createImage(files[0]);
+      this.createImage(files[0])
     },
-    createImage(file) {
-      let image = new Image();
-      let reader = new FileReader();
-      let $this = this;
+    createImage (file) {
+      let reader = new FileReader()
+      let $this = this
 
       reader.onload = (e) => {
-        $this.posterSrc = e.target.result;
-        $this.posterName = file.name;
-      };
-      reader.readAsDataURL(file);
+        $this.posterSrc = e.target.result
+        $this.posterName = file.name
+      }
+      reader.readAsDataURL(file)
+      this.posterImg = file
     },
     removePoster: function (e) {
-      this.posterSrc = '';
-      this.posterName = '';
+      this.posterSrc = ''
+      this.posterName = ''
     },
 
-    addFilm() {
+    clearData () {
+      this.name = ''
+      this.description = ''
+      this.posterName = ''
+      this.posterSrc = ''
+      this.type = ''
+      this.typeSrc = false
+      this.posterImg = null
+    },
+
+    addFilm () {
+      this.processUpload = true
       const newFilm = {
         title: this.name,
         description: this.description,
         poster: this.posterName || this.posterSrc,
         type: this.type
       }
+
+      if (this.posterImg) newFilm.posterImg = this.posterImg
+
       this.$store.dispatch('createdFilm', newFilm)
         .then(() => {
+          // eslint-disable-next-line no-undef
           Materialize.toast('success', 3000)
+          this.processUpload = false
+          this.clearData()
         })
         .catch(err => {
-          console.log(err);
+          console.error(err)
+          this.processUpload = false
         })
     }
   }

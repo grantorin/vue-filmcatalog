@@ -16,17 +16,19 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
+import { setTimeout } from 'timers'
 export default {
-  data() {
+  data () {
     return {
       preload: true
     }
   },
 
   computed: {
-    films() {
+    films () {
+      // eslint-disable-next-line
       setTimeout(() => {
+        // eslint-disable-next-line
         this.preload = false
       }, 1000)
       return this.$store.getters.films
@@ -34,8 +36,8 @@ export default {
   },
 
   filters: {
-    filterDescription(string) {
-      return string.length > 150 ? string.slice(0, 150) + ' ...' : string;
+    filterDescription (string) {
+      return string.length > 150 ? string.slice(0, 150) + ' ...' : string
     }
   }
 }

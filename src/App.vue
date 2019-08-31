@@ -29,40 +29,40 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
 export default {
   computed: {
-    isUserLoggedIn() {
+    isUserLoggedIn () {
       return this.$store.getters.isUserLoggedIn
     },
-    linkMenu() {
-      if(this.isUserLoggedIn) {
+    linkMenu () {
+      if (this.isUserLoggedIn) {
         return [
-            {title: 'Home', url: '/', icon: 'account_balance'},
-            {title: 'About', url: 'about', icon: 'art_track'},
-            {title: 'New Film', url: 'new', icon: 'add_box'}
+          { title: 'Home', url: '/', icon: 'account_balance' },
+          { title: 'About', url: '/about', icon: 'art_track' },
+          { title: 'New Film', url: '/new', icon: 'add_box' }
         ]
       }
       return [
-          {title: 'Home', url: '/', icon: 'account_balance'},
-          {title: 'About', url: 'about', icon: 'art_track'},
-          {title: 'Registration', url: 'reg', icon: 'assignment_ind'},
-          {title: 'Authorization', url: 'auth', icon: 'account_circle'},
+        { title: 'Home', url: '/', icon: 'account_balance' },
+        { title: 'About', url: '/about', icon: 'art_track' },
+        { title: 'Registration', url: '/reg', icon: 'assignment_ind' },
+        { title: 'Authorization', url: '/auth', icon: 'account_circle' }
       ]
     }
   },
 
   methods: {
-    logoutUser() {
+    logoutUser () {
       this.$store.dispatch('logoutUser')
-      if(this.$router.currentRoute.name !== 'home') {
+      if (this.$router.currentRoute.name !== 'home') {
         this.$router.push('/')
       }
     }
   },
 
-  mounted() {
-    $(".sidenav-trigger").sideNav();
+  mounted () {
+    // eslint-disable-next-line no-undef
+    $('.sidenav-trigger').sideNav()
   }
 }
 </script>>
