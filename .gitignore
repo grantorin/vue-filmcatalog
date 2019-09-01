@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 /dist
+.firebaserc
+firebase.json
+.firebase/hosting.ZGlzdA.cache
 
 # local env files
 .env.local
@@ -19,3 +22,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
